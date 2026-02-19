@@ -1,7 +1,4 @@
 package biblioteca;
-
-//  Pega id e nome dos livros.
-
 public class Autor {
 
   private int id;
@@ -18,6 +15,11 @@ public class Autor {
 
   public String getNome() {
     return nome;
+  }
+
+  @Override 
+  public String toString() {
+    return id + " - " + nome;
   }
 
 }

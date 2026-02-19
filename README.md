@@ -25,7 +25,7 @@ A ideia é começar pelo **MVP (mínimo que funciona)** e depois ir evoluindo co
 ### 3) Biblioteca (dados + ações)
 - [x] Criar `Biblioteca.java`
   - [ ] Atributo: `List<Livro> livros = new ArrayList<>();`
-- [ ] Criar método `carregarLivros()`
+- [x] Criar método `carregarLivros()`
   - [ ] Adicionar 3 a 5 livros hardcoded (fixos no código)
 - [ ] Criar método `listarDisponiveis()`
   - [ ] Mostrar apenas livros com `disponivel == true`

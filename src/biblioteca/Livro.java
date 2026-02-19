@@ -31,4 +31,10 @@ public class Livro {
     return disponivel;
   }
 
+  @Override 
+  public String toString() {
+    String status = disponivel ? "Disponivel" : "Indisponivel";
+    return id + " - " + titulo + " - " + autor.getNome() + " (" + status + ")";
+  }
+
 }
