@@ -1,109 +1,48 @@
-# Projeto: Biblioteca (Console) — Checklist MVP + Upgrades
+# Sistema de Biblioteca em Java (Console)
 
-Este arquivo é um guia passo a passo para desenvolver um sistema simples de empréstimo de livros no console usando Java.
-A ideia é começar pelo **MVP (mínimo que funciona)** e depois ir evoluindo com **Upgrades**.
+Sistema simples de gerenciamento de biblioteca desenvolvido em **Java** para estudo de **Programação Orientada a Objetos** e estruturação de um projeto de console.
 
----
+## Funcionalidades
 
-## ✅ Checklist MVP (mínimo que funciona)
+- Listar livros disponíveis
+- Buscar livro por ID
+- Realizar empréstimo de livro
+- Registrar empréstimos
+- Menu interativo no console
+- Validações de:
+  - ID inexistente
+  - Livro indisponível
 
-### 1) Estrutura básica
-- [x] Criar o projeto Java
-- [x] Criar um package (ex: `biblioteca`)
-- [x] Criar `Main.java` com o método `main`
+## Estrutura do Projeto
 
-### 2) Modelos simples (classes)
-- [x] Criar `Autor.java`
-  - [x] Atributos: `id (int)`, `nome (String)`
-  - [x] Construtor
-  - [x] Getters (ou deixar público por enquanto, se ainda estiver aprendendo)
-- [x] Criar `Livro.java`
-  - [x] Atributos: `id (int)`, `titulo (String)`, `autor (Autor)`, `disponivel (boolean)`
-  - [x] Construtor (já iniciar `disponivel = true`)
-  - [ ] Método opcional: `toString()` para imprimir bonito
+- **Main.java**  
+  Responsável pela interação com o usuário (menu e leitura de dados).
 
-### 3) Biblioteca (dados + ações)
-- [x] Criar `Biblioteca.java`
-  - [ ] Atributo: `List<Livro> livros = new ArrayList<>();`
-- [x] Criar método `carregarLivros()`
-  - [ ] Adicionar 3 a 5 livros hardcoded (fixos no código)
-- [ ] Criar método `listarDisponiveis()`
-  - [ ] Mostrar apenas livros com `disponivel == true`
-  - [ ] Exibir pelo menos: `id - titulo - autor`
-- [ ] Criar método `buscarPorId(int id)`
-  - [ ] Retornar o `Livro` se encontrar
-  - [ ] Retornar `null` se não encontrar
+- **Biblioteca.java**  
+  Contém as listas e as regras do sistema:
+  - Livros
+  - Autores
+  - Empréstimos  
+  Métodos para carregar dados, listar, buscar e emprestar livros.
 
-### 4) Interação no console (fluxo mínimo)
-- [ ] No `Main.java`, criar `Scanner`
-- [ ] Criar `Biblioteca` e chamar `carregarLivros()`
-- [ ] Perguntar ao usuário: **"Deseja ver os livros disponíveis? (SIM/NÃO)"**
-- [ ] Se a resposta for **NÃO**
-  - [ ] Mostrar mensagem de despedida
-  - [ ] Encerrar o programa
-- [ ] Se a resposta for **SIM**
-  - [ ] Chamar `listarDisponiveis()`
-  - [ ] Pedir o `id` do livro para emprestar
-  - [ ] Validar:
-    - [ ] Se `buscarPorId()` retornar `null`: mostrar "ID inválido" e encerrar
-    - [ ] Se `livro.disponivel == false`: mostrar "Livro indisponível" e encerrar
-  - [ ] Pedir o nome do cliente
-  - [ ] Marcar o livro como indisponível (`disponivel = false`)
-  - [ ] Mostrar mensagem de sucesso confirmando o empréstimo
+- **Livro.java**  
+  Modelo de livro (id, título, autor, disponibilidade) e comportamentos básicos.
 
-✅ Quando tudo isso funcionar, o MVP está pronto.
+- **Autor.java**  
+  Modelo de autor (id, nome).
 
----
+- **Emprestimo.java**  
+  Modelo de empréstimo (id, livro, cliente, datas de empréstimo e devolução).
 
-## 🚀 Upgrades (melhorias depois do MVP)
+## Tecnologias Utilizadas
 
-### A) Registrar empréstimos de verdade
-- [ ] Criar `Emprestimo.java`
-  - [ ] Atributos: `id`, `livro`, `nomeCliente`
-- [ ] Na `Biblioteca`, adicionar:
-  - [ ] `List<Emprestimo> emprestimos = new ArrayList<>();`
-- [ ] Ao emprestar um livro:
-  - [ ] Criar um `Emprestimo` e adicionar na lista
-  - [ ] Exibir um "comprovante" no console (cliente + livro)
+- Java
+- `ArrayList`
+- `Scanner`
+- `LocalDateTime`
 
-### B) Trabalhar com datas
-- [ ] Usar `LocalDateTime`
-  - [ ] `dataEmprestimo` no empréstimo
-  - [ ] (Opcional) `dataCadastro` no livro
-- [ ] Mostrar data no comprovante
+## Como Executar
 
-### C) Menu interativo em loop
-- [ ] Substituir SIM/NÃO por menu:
-  - [ ] 1 - Listar livros disponíveis
-  - [ ] 2 - Emprestar livro por id
-  - [ ] 0 - Sair
-- [ ] Validar entradas inválidas sem quebrar o programa
-
-### D) Busca e filtros
-- [ ] Buscar livro por título (contém)
-- [ ] Buscar livro por autor
-- [ ] Filtrar por “disponível / indisponível”
-
----
-
-## 🧭 Ordem recomendada
-1. MVP completo
-2. Emprestimo
-3. Datas
-4. Menu em loop
-5. Busca e filtros
-
----
-
-## ✅ Critério de finalização
-O projeto está OK quando:
-- Lista apenas livros disponíveis
-- Permite emprestar por id
-- Marca como indisponível
-- Confirma no console e encerra (MVP)
-
-E fica excelente quando:
-- Registra empréstimos
-- Mostra datas
-- Possui menu e validações melhores
-- Permite buscar e filtrar
+1. Clone o repositório:
+```bash
+git clone <url-do-repositorio>

@@ -1,8 +1,7 @@
 package biblioteca;
-import java.time.LocalDateTime;
+
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class Biblioteca {
   private List<Livro> livros = new ArrayList<>();
@@ -10,8 +9,7 @@ public class Biblioteca {
   private List<Emprestimo> emprestimos = new ArrayList<>();
   private int proximoIdEmprestimo = 1;
 
-public void carregarLivros() {
-
+  public void carregarLivros() {
     Autor autor1 = new Autor(1, "Machado de Assis");
     Autor autor2 = new Autor(2, "George Orwell");
 
@@ -27,47 +25,62 @@ public void carregarLivros() {
     livros.add(livro2);
     livros.add(livro3);
     livros.add(livro4);
-
-}
+  }
 
   public void listarDisponiveis() {
-    for (Livro livro:livros) {
+    for (Livro livro : livros) {
       if (livro.isDisponivel()) {
-        System.out.println( 
-          livro.getId() +  " - " +
+        System.out.println(
+          livro.getId() + " - " +
           livro.getTitulo() + " - " +
-          livro.getAutor().getNome());
+          livro.getAutor().getNome()
+        );
       }
     }
   }
 
-
   public Livro buscarLivroPorId(int id) {
     for (Livro livro : livros) {
       if (livro.getId() == id) {
-        System.out.println("----------------------------");
-        if(!livro.isDisponivel()){
-          System.out.println("Esse livro foi emprestado, volte depois.");
-        } else {
-          return livro;
-        }
-      } 
+        return livro;
+      }
     }
     return null;
   }
 
-  public void emprestarLivro(int idLivro, String nomeCliente) {
+  public Emprestimo emprestarLivro(int idLivro, String nomeCliente) {
     Livro livro = buscarLivroPorId(idLivro);
-    int id = proximoIdEmprestimo;
+
+    if (livro == null) {
+      System.out.println("Esse livro não foi encontrado.");
+      return null;
+    }
+
+    if (!livro.isDisponivel()) {
+      System.out.println("Esse livro já foi emprestado, volte depois.");
+      return null;
+    }
+
+    int idEmprestimo = proximoIdEmprestimo;
     proximoIdEmprestimo++;
 
-    if(!livro.isDisponivel()){
-      System.out.println("Esse livro ja foi emprestado, volte depois");
-    }
-    
-    if (livro == null) {
-      System.out.println("Nao possuímos um livro com esse id");
+    livro.marcarIndisponivel();
+
+    Emprestimo novoEmprestimo = new Emprestimo(idEmprestimo, livro, nomeCliente);
+    emprestimos.add(novoEmprestimo);
+
+    return novoEmprestimo;
+  }
+
+
+  public void listarEmprestimos() {
+    if (emprestimos.isEmpty()) {
+      System.out.println("Nenhum empréstimo registrado.");
+      return;
     }
 
-  } 
+    for (Emprestimo e : emprestimos) {
+      System.out.println(e);
+    }
+  }
 }

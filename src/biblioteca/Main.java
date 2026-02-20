@@ -1,55 +1,78 @@
 package biblioteca;
+
 import java.util.Scanner;
 
+public class Main {
+  public static void main(String[] args) {
+    Biblioteca biblioteca = new Biblioteca();
+    biblioteca.carregarLivros();
 
-  public class Main{
-    public static void main(String[] args) {
-      System.out.println("\n-- -- -- --");
-      Biblioteca biblioteca = new Biblioteca();
-      biblioteca.carregarLivros();
-      Scanner scanner = new Scanner(System.in);
-      while(true) {
-        System.out.println("\n Digite a opção que deseja");
-        Menu.mostrar();
-        int opcao = scanner.nextInt();
-        switch(opcao) {
-          case 1:
-            biblioteca.listarDisponiveis();
+    Scanner scanner = new Scanner(System.in);
 
+    while (true) {
+      Menu.mostrar();
+      System.out.print("Escolha uma opção: ");
+
+      int opcao = scanner.nextInt();
+      scanner.nextLine(); 
+
+      switch (opcao) {
+        case 1:
+          System.out.println("\n--- Livros disponíveis ---");
+          biblioteca.listarDisponiveis();
           break;
-          
-          case 2: 
-            System.out.println("----------------------------");
-            System.out.println("----------------------------");
-            biblioteca.listarDisponiveis();
-            System.out.println("Qual é o id?");
-            int buscarId = scanner.nextInt();
-            Livro idLivro = biblioteca.buscarLivroPorId(buscarId);
-            if (idLivro == null) {
-              System.out.println("Nao foi possível encontrar um livro com esse id.");
-            } else {
-              System.out.println(idLivro);
-            }
+
+        case 2:
+          System.out.println("\n--- Buscar livro por ID ---");
+          biblioteca.listarDisponiveis();
+          System.out.print("Digite o ID do livro: ");
+          int buscarId = scanner.nextInt();
+          scanner.nextLine(); 
+
+          Livro livro = biblioteca.buscarLivroPorId(buscarId);
+          if (livro == null) {
+            System.out.println("Não foi possível encontrar um livro com esse ID.");
+          } else {
+            System.out.println("Encontrado: " + livro);
+          }
           break;
-            
-          case 3:
-            System.out.println("Obrigado por visitar nossa biblioteca!!!");
-            scanner.close();
-            return;
-        
-          default:
-            System.out.println("Opção invalida");
-            break;
-        }
+
+        case 3:
+          System.out.println("\n--- Empréstimo ---");
+          biblioteca.listarDisponiveis();
+          System.out.print("Digite o ID do livro para empréstimo: ");
+          int idLivro = scanner.nextInt();
+          scanner.nextLine(); 
+
+          System.out.print("Digite seu nome: ");
+          String nomeCliente = scanner.nextLine();
+
+          Emprestimo emprestimo = biblioteca.emprestarLivro(idLivro, nomeCliente);
+          if (emprestimo != null) {
+            System.out.println("Empréstimo #" + emprestimo.getIdEmprestimo()
+                + " realizado para " + emprestimo.getNomeCliente() + ".");
+          }
+          break;
+
+        case 4:
+          System.out.println("Obrigado por visitar nossa biblioteca!");
+          scanner.close();
+          return;
+
+        default:
+          System.out.println("Opção inválida.");
+          break;
       }
     }
-    class Menu {
-      public static void mostrar() {
-        System.out.println("Opções");
-        System.out.println("1 - Listar disponíveis");
-        System.out.println("2 - Buscar livro por id");
-        System.out.println("3 - Sair do programa.");
-      }
-    }
-
   }
+
+  static class Menu {
+    public static void mostrar() {
+      System.out.println("\n=== MENU BIBLIOTECA ===");
+      System.out.println("1 - Listar disponíveis");
+      System.out.println("2 - Buscar livro por ID");
+      System.out.println("3 - Fazer empréstimo");
+      System.out.println("4 - Sair");
+    }
+  }
+}

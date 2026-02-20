@@ -36,5 +36,5 @@ public class Livro {
     String status = disponivel ? "Disponivel" : "Indisponivel";
     return id + " - " + titulo + " - " + autor.getNome() + " (" + status + ")";
   }
-
+  
 }
