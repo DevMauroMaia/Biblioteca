@@ -14,7 +14,7 @@ public class Main {
       System.out.print("Escolha uma opção: ");
 
       int opcao = scanner.nextInt();
-      scanner.nextLine(); 
+      scanner.nextLine(); // consome o Enter
 
       switch (opcao) {
         case 1:
@@ -27,7 +27,7 @@ public class Main {
           biblioteca.listarDisponiveis();
           System.out.print("Digite o ID do livro: ");
           int buscarId = scanner.nextInt();
-          scanner.nextLine(); 
+          scanner.nextLine();
 
           Livro livro = biblioteca.buscarLivroPorId(buscarId);
           if (livro == null) {
@@ -42,7 +42,7 @@ public class Main {
           biblioteca.listarDisponiveis();
           System.out.print("Digite o ID do livro para empréstimo: ");
           int idLivro = scanner.nextInt();
-          scanner.nextLine(); 
+          scanner.nextLine();
 
           System.out.print("Digite seu nome: ");
           String nomeCliente = scanner.nextLine();
@@ -55,6 +55,21 @@ public class Main {
           break;
 
         case 4:
+          System.out.println("\n--- Devolução ---");
+          System.out.print("Digite o ID do livro para devolver: ");
+          int idDevolver = scanner.nextInt();
+          scanner.nextLine();
+
+          System.out.print("Digite seu nome: ");
+          String nomeDev = scanner.nextLine();
+
+          Emprestimo devolucao = biblioteca.devolverLivro(idDevolver, nomeDev);
+          if (devolucao != null) {
+            System.out.println("Devolvido com sucesso! " + devolucao);
+          }
+          break;
+
+        case 5:
           System.out.println("Obrigado por visitar nossa biblioteca!");
           scanner.close();
           return;
@@ -72,7 +87,8 @@ public class Main {
       System.out.println("1 - Listar disponíveis");
       System.out.println("2 - Buscar livro por ID");
       System.out.println("3 - Fazer empréstimo");
-      System.out.println("4 - Sair");
+      System.out.println("4 - Devolver livro");
+      System.out.println("5 - Sair");
     }
   }
 }

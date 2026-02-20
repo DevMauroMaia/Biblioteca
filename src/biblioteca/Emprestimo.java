@@ -7,7 +7,7 @@ public class Emprestimo {
   private Livro livro;
   private String nomeCliente;
   private LocalDateTime dataEmprestimo;
-  private LocalDateTime dataDevolucao; // começa null
+  private LocalDateTime dataDevolucao;
 
   public Emprestimo(int idEmprestimo, Livro livro, String nomeCliente) {
     this.idEmprestimo = idEmprestimo;

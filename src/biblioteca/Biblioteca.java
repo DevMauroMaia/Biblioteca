@@ -73,6 +73,35 @@ public class Biblioteca {
   }
 
 
+  public Emprestimo devolverLivro(int idLivro, String nomeCliente) {
+    Livro livro = buscarLivroPorId(idLivro);
+
+    if (livro == null) {
+      System.out.println("Esse livro nao existe.");
+      return null;
+    }
+
+    if (livro.isDisponivel()) {
+      System.out.println("Esse livro nao esta emprestado.");
+      return null;
+    }
+
+    for (Emprestimo e : emprestimos) {
+      boolean mesmoLivro = e.getLivro().getId() == idLivro;
+      boolean emAberto = !e.isDevolvido();
+      boolean mesmoCliente = e.getNomeCliente().equalsIgnoreCase(nomeCliente.trim());
+
+      if (mesmoLivro && emAberto && mesmoCliente) {
+       e.registrarDevolucao();
+       livro.marcarDisponivel();
+        return e;
+      }
+   }
+    System.out.println("Nao existe emprestimo em aberto para esse livro nesse nome.");
+    return null;
+  }
+
+
   public void listarEmprestimos() {
     if (emprestimos.isEmpty()) {
       System.out.println("Nenhum empréstimo registrado.");

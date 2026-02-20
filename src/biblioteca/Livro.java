@@ -17,6 +17,10 @@ public class Livro {
   public void marcarIndisponivel() {
     this.disponivel = false;
   }
+ 
+  public void marcarDisponivel() {
+    this.disponivel = true;
+  }
 
   public Autor getAutor() {
     return autor;
